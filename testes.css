@@ -1,0 +1,183 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Oswald:wght@500;700&display=swap');
+
+.titulo-tlou {
+    position: relative;
+    display: table;
+    margin: 60px auto;
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(35px, 6vw, 75px);
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #c6cbbb;
+    text-align: center;
+
+    /* Letras envelhecidas */
+    text-shadow:
+        2px 2px 0 #4c5745,
+        -1px -1px 0 #858f7a,
+        0 0 15px rgba(125, 155, 101, 0.25);
+
+    animation: aparecer-tlou 1.5s ease-out both;
+}
+
+/* Símbolos nas extremidades */
+.titulo-tlou .simbolo {
+    display: inline-block;
+    color: #80966a;
+    font-size: 0.55em;
+    vertical-align: middle;
+    margin: 0 12px;
+
+    text-shadow:
+        0 0 8px #718b59,
+        0 0 18px rgba(113, 139, 89, 0.5);
+
+    animation: simbolo-vivo 3s ease-in-out infinite;
+}
+
+/* Símbolo da esquerda */
+.titulo-tlou .simbolo:first-child {
+    animation-delay: 0s;
+}
+
+/* Símbolo da direita */
+.titulo-tlou .simbolo:last-child {
+    animation-delay: 1.5s;
+}
+
+/* Riscos sobre as letras */
+.titulo-tlou::before {
+    content: "//  /  //";
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #748668;
+    font-family: monospace;
+    font-size: 13px;
+    letter-spacing: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    animation: aparecer-riscos 1s ease 0.8s forwards;
+}
+
+/* Linha orgânica abaixo do título */
+.titulo-tlou::after {
+    content: "";
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #657d53,
+        #b1c49a,
+        #657d53,
+        transparent
+    );
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center;
+    box-shadow: 0 0 12px #718b59;
+    animation: linha-infectada 1.2s ease 0.7s forwards;
+}
+
+/* Entrada com desfoque */
+@keyframes aparecer-tlou {
+    0% {
+        opacity: 0;
+        transform: translateY(25px) scale(0.94);
+        filter: blur(8px);
+        letter-spacing: 15px;
+    }
+
+    65% {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        letter-spacing: 5px;
+        filter: blur(0);
+    }
+}
+
+/* Símbolos pulsando e girando */
+@keyframes simbolo-vivo {
+    0%, 100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: rotate(25deg) scale(1.25);
+        opacity: 1;
+    }
+}
+
+/* Riscos aparecendo */
+@keyframes aparecer-riscos {
+    from {
+        opacity: 0;
+        letter-spacing: 15px;
+    }
+
+    to {
+        opacity: 0.75;
+        letter-spacing: 8px;
+    }
+}
+
+/* Linha sendo desenhada */
+@keyframes linha-infectada {
+    to {
+        transform: translateX(-50%) scaleX(1);
+    }
+}
+
+/* Glitch e brilho ao passar o mouse */
+.titulo-tlou:hover {
+    color: #e0e8d4;
+    text-shadow:
+        2px 0 #789263,
+        -2px 0 #384b32,
+        0 0 12px rgba(133, 175, 105, 0.8),
+        0 0 28px rgba(100, 140, 77, 0.4);
+
+    animation: glitch-tlou 0.3s ease-in-out;
+}
+
+@keyframes glitch-tlou {
+    0%, 100% {
+        transform: translate(0);
+    }
+
+    25% {
+        transform: translate(-2px, 1px);
+    }
+
+    50% {
+        transform: translate(2px, -1px);
+    }
+
+    75% {
+        transform: translate(-1px, -1px);
+    }
+}
+
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    .titulo-tlou,
+    .titulo-tlou::before,
+    .titulo-tlou::after,
+    .titulo-tlou .simbolo {
+        animation: none;
+        opacity: 1;
+        filter: none;
+        transform: none;
+    }
+}
